@@ -1,0 +1,19 @@
+{% if session.username %}
+<title>{{ session.username }}</title> 
+<p>
+    You're logged in as {{ session.username }}
+</p>
+<br><a href="/logout">Log out</a>
+{% else %}
+<form action="/login" method ="POST">
+<p>
+<p> username:<br>
+<input type ="text" name ="username"></p>
+<p> password:<br>
+<input type="password" name="password"></p>
+<input type="submit" value="log in">
+</p>
+</form>
+<br><a href="signup_user"> Sign up as a user</a>
+<br><a href="signup_admin"> Sign up as an admin</a>
+{% endif %}

@@ -1,0 +1,31 @@
+<style>
+    th, td {
+  padding-left: 15px;
+}
+</style>
+
+{% if session.username %}
+<title>{{ session.username }}</title> 
+<p>
+    You're logged in as {{ session.username }}
+<p><a href="/logout"> log out</a></p>
+<p>
+<h2>Restaurants</h2>
+<table>
+    <tr><th>restaurant</th><th>location</th><th>price</th><th>category</th></tr>
+    {% for restaurant in restaurants %}
+        <tr><td><b> {{ restaurant.name }} </b></td>
+        <td> {{ restaurant.city }}</td>
+        <td>{% for i in range(restaurant.price) %}
+            €
+            {% endfor %}
+        </td>
+        <td>{{ restaurant.category }}</td></tr>
+    {% endfor %}
+</table>
+</p>
+
+{% else %}
+error
+
+{% endif %}

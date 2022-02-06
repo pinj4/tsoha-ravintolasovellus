@@ -1,0 +1,39 @@
+<h2>Add restaurant</h2>
+<form action="/add_restaurant" method="POST">
+<p>
+    Name:<input type="text" name="name" required><br>
+    City:
+    <select name="city">
+        <option value= "helsinki">Helsinki</option> 
+        <option value= "espoo">Espoo</option>
+        <option value= "vantaa">Vantaa</option>
+    </select><br>
+    Address: <input type="text" name="address"><br>
+    Price:
+    <select name="price">
+        <option value="1">€</option>
+        <option value="2">€€</option>
+        <option value="3">€€€</option>
+        <option value="4">€€€€</option>
+    </select><br>
+    Category:
+    <select name="category">
+        <option value="cafe">cafe</option>
+        <option value="chinese">chinese</option>
+        <option value="fast food">fast food</option>
+        <option value="fine dining">fine dining</option>
+        <option value="healthy">healthy</option>
+        <option value="indian">indian</option>
+        <option value="nepalese">nepalese</option>
+        <option value="sushi">sushi</option>
+        <option value="vegetarian">vegetarian</option>
+        <option value="vegan">vegan</option>
+    </select><br>
+    Describtion: <br>
+    <textarea name="desc" rows="7" cols="40">
+    </textarea><br>
+    <input type="submit" value="create">
+</p>
+</form>
+<br>
+<a href="/admin_page">return</a>
