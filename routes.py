@@ -7,8 +7,6 @@ import restaurant
 
 app.secret_key = getenv("SECRET_KEY")
 
-## !!!!!!!!!!!!VAIHA DESCRIBTION ->>>> DESCRIPTION !!!!!!!!
-
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -33,8 +31,6 @@ def login():
         else:
             return render_template("error.html")
 
-    ## todo alerts
-
 @app.route("/user_page", methods = ["GET", "POST"])
 def user_page():
     restaurants = restaurant.get_all_restaurants()
@@ -43,7 +39,6 @@ def user_page():
 
 @app.route("/admin_page", methods =["GET", "POST"])
 def admin_page():
-    #username = session["username"]
     restaurants = restaurant.get_restaurants_by_admin()
     return render_template("admin.html", restaurants = restaurants)
 
@@ -77,9 +72,6 @@ def signup_user():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-
-    ## TODO: check password (väh. 5 kirjainta ja numero)
-    ## TODO: rewrite password (to confirm)
 
         users.add_new_user(username, password, False)
 

@@ -13,7 +13,7 @@ CREATE TABLE restaurants (
     address TEXT,
     category TEXT,
     price INT,
-    describtion TEXT
+    description TEXT
 );
 
 CREATE TABLE lists (

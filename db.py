@@ -4,5 +4,4 @@ from app import app
 
 
 app.config["SQLALCHEMY_DATABASE_URI"] = getenv("DATABASE_URL")
- ## postgresql:///template1
 db = SQLAlchemy(app)

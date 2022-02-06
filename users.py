@@ -25,11 +25,6 @@ def login(username, password):
         else:
             return False
 
-## TODO: check long enough password, unique username (signup)
-## TODO: check right password and username (login)
-
-#def user_id():
-    #return session.get("username", 0)
 def get_user(username):
     sql = "SELECT * FROM users WHERE username = :username"
     result = db.session.execute(sql, {"username":username})
@@ -38,11 +33,3 @@ def get_user(username):
 
 def logout():
     del session["username"]
-
-def admin(username):
-    sql = "SELECT is_admin FROM users WHERE username = :username"
-    result = db.session.execute(sql, {"username": username}).fetchone()
-    if result == "t":
-        return True
-    if result == "f":
-        return False
