@@ -14,3 +14,12 @@ Sovelluksen ominaisuuksia:
 - Ylläpitäjä voi poistaa omia ravintoloitaan
 - Ylläpitäjä pystyy muokkaamaan ravintolan tietoja ja määrittämään mitä tietoja ravintolasta näkyy
 - Ylläpitäjä pystyy poistamaan käyttäjän antaman arvostelun ravintolasta
+
+## Välipalautus 2
+Nykyisessä versiossa pystyy:
+- kirjautumaan sisään ja luomaan tunnukset käyttäjänä ja ylläpitäjänä
+- näkemään lisätyt ravintolat ja niiden tiedot
+- ylläpitäjä voi listätä ravintolan ja nähdä aikaisemmin lisäämänsä ravintolat
+- kirjautumaan ulos
+
+Sovellusta pystyy testaamaan [Herokussa](https://tsoha-restaurant-app.herokuapp.com/) 
