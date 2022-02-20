@@ -15,10 +15,13 @@ Sovelluksen ominaisuuksia:
 - Ylläpitäjä pystyy muokkaamaan ravintolan tietoja ja määrittämään mitä tietoja ravintolasta näkyy
 - Ylläpitäjä pystyy poistamaan käyttäjän antaman arvostelun ravintolasta
 
-## Välipalautus 2
+## Välipalautus 3
 Nykyisessä versiossa pystyy:
 - kirjautumaan sisään ja luomaan tunnukset käyttäjänä ja ylläpitäjänä
 - näkemään lisätyt ravintolat ja niiden tiedot
+- näkemään ravintoloista lisää tietoa sekä sen arvostelut klikkaamalla ravintolamn nimeä
+- tekemään arvostelun ravintolalle
+- luomaan omia listoja ja lisätä niihin ravintoloita
 - ylläpitäjä voi listätä ravintolan ja nähdä aikaisemmin lisäämänsä ravintolat
 - kirjautumaan ulos
 
