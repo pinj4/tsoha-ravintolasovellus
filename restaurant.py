@@ -16,7 +16,6 @@ def get_restaurants_by_admin():
 
 
 def new_restaurant(name, city, address, category, price, description):
-    #try: 
     username = session["username"]
     user_id = get_user_id(username)
 

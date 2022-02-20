@@ -26,7 +26,7 @@ def login(username, password):
             return False
 
 def get_user(username):
-    sql = "SELECT * FROM users WHERE username = :username"
+    sql = "SELECT id, username, is_admin FROM users WHERE username = :username"
     result = db.session.execute(sql, {"username":username})
     user = result.fetchone()
     return user
