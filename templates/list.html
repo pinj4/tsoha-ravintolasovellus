@@ -1,0 +1,7 @@
+{{ name }}
+
+{% for restaurant in content %}
+ <a href="/restaurant_page/{{ restaurant.id }}">{{ restaurant.name }}</a><br>
+{% endfor %}
+
+<a href="/user_page">return</a>

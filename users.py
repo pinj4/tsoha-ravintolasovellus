@@ -31,5 +31,9 @@ def get_user(username):
     user = result.fetchone()
     return user
 
+def get_user_id(username):
+    user = get_user(username)
+    return user.id
+
 def logout():
     del session["username"]

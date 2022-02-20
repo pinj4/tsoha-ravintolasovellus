@@ -1,0 +1,16 @@
+<h2>Add review</h2>
+<form action="/review_restaurant/{{ restaurant.id }}" method="POST">
+<p>
+    Rating:
+    <select name="rating">
+        <option value= "1">1</option> 
+        <option value= "2">2</option>
+        <option value= "3">3</option>
+        <option value= "4">4</option>
+        <option value= "5">5</option>
+    </select><br>
+    Comment:
+    <textarea name="comment" rows="7" cols="40">
+    </textarea><br>
+    <input type="submit" value="add">
+</form>

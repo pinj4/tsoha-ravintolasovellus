@@ -20,7 +20,7 @@ CREATE TABLE lists (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users,
     name TEXT
-    );
+);
 
 CREATE TABLE list_content (
     list_id INT REFERENCES lists,
@@ -31,7 +31,8 @@ CREATE TABLE reviews (
     id SERIAL PRIMARY KEY,
     restaurant_id INT REFERENCES restaurants,
     user_id INT REFERENCES users,
-    stars INT,
+    username TEXT,
+    rating INT,
     comment TEXT
 );
 

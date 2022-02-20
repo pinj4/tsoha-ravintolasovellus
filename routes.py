@@ -4,6 +4,8 @@ from app import app
 from db import db
 import users
 import restaurant
+import reviews
+import lists
 
 app.secret_key = getenv("SECRET_KEY")
 
@@ -34,7 +36,8 @@ def login():
 @app.route("/user_page", methods = ["GET", "POST"])
 def user_page():
     restaurants = restaurant.get_all_restaurants()
-    return render_template("user.html", restaurants = restaurants)
+    users_lists = lists.get_users_lists()
+    return render_template("user.html", restaurants = restaurants, lists = users_lists)
     
 
 @app.route("/admin_page", methods =["GET", "POST"])
@@ -89,4 +92,56 @@ def signup_admin():
         users.add_new_user(username, password, True)
         return redirect("/admin_page")
 
+@app.route("/review_restaurant/<int:id>", methods = ["GET", "POST"])
+def review_restaurant(id):
+    if request.method == "GET":
+        restaurant_info = restaurant.get_restaurant(id)
+        return render_template("review.html", restaurant = restaurant_info)
+    
+    if request.method == "POST":
+        rating = request.form["rating"]
+        comment = request.form["comment"]
+        restaurant_info = restaurant.get_restaurant(id)
 
+        reviews.add_review(rating, comment, id)
+        return redirect("/user_page")
+
+@app.route("/restaurant_page/<int:id>", methods = ["GET"])
+def restaurant_page(id):
+    restaurant_info = restaurant.get_restaurant(id)
+    reviews_info = reviews.get_reviews(id)
+
+    return render_template("restaurant.html", restaurant = restaurant_info, reviews = reviews_info)
+
+@app.route("/list_page/<int:id>", methods = ["GET"])
+def list_page(id):
+    content = lists.get_list_content(id)
+    name = lists.get_list_name(id)
+
+    return render_template("list.html", name = name, content = content)
+
+@app.route("/add_to_list/<int:id>", methods = ["GET", "POST"])
+def add_to_list(id):
+    if request.method == "GET":
+        restaurant_info = restaurant.get_restaurant(id)
+        users_lists = lists.get_users_lists()
+
+        return render_template("add_to_list.html", restaurant = restaurant_info, lists = users_lists)
+    
+    if request.method == "POST":
+        restaurant_id = id
+        list_id = request.form["list_id"]
+
+        lists.add_to_list(list_id, restaurant_id)
+        return redirect("/restaurant_page/" + str(id))
+
+@app.route("/create_list", methods = ["GET", "POST"])
+def create_list():
+    if request.method == "GET":
+        return render_template("create_list.html")
+    
+    if request.method == "POST":
+        name = request.form["name"]
+
+        lists.create_list(name)
+        return redirect("/user_page")

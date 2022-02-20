@@ -1,0 +1,16 @@
+<h2>Add to list</h2>
+<form action="/add_to_list/{{ restaurant.id }}" method="POST">
+<p>
+    <select name="lists">
+        {% if lists %}
+            {% for list in lists %}
+            <option value="{{ list.name }}">{{ list.name }}</option>
+            <input type=hidden name ="list_id" value = "{{ list.id }}">
+            {% endfor %}
+        {% else %}
+        You don't have any lists yet.
+        {% endif %}
+    <input type="submit" value="add">
+</form>
+
+<a href="/restaurant_page/{{ restaurant.id }}">return</a>

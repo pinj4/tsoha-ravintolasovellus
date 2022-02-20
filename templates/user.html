@@ -14,7 +14,7 @@
 <table>
     <tr><th>restaurant</th><th>location</th><th>price</th><th>category</th></tr>
     {% for restaurant in restaurants %}
-        <tr><td><b> {{ restaurant.name }} </b></td>
+        <tr><td><a href="/restaurant_page/{{ restaurant.id }}"> {{ restaurant.name }}</a></td>
         <td> {{ restaurant.city }}</td>
         <td>{% for i in range(restaurant.price) %}
             €
@@ -24,6 +24,17 @@
     {% endfor %}
 </table>
 </p>
+
+<h2> Your lists:</h2>
+{% if not lists %}
+You don't have any lists yet. 
+<a href="/create_list">Add?</a>
+{% else %}
+{% for list in lists %}
+    <a href="/list_page/{{ list.id }}">{{ list.name }}</a><br>
+{% endfor %}
+{% endif %}
+<br><a href="/create_list">Create a new list</a>
 
 {% else %}
 error

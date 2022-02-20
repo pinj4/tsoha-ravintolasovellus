@@ -1,0 +1,35 @@
+<title>{{ restaurant.name }}</title>
+<h2>{{ restaurant.name }}</h2>
+<br>
+<p>
+    <b>location:</b>{{ restaurant.address }} {{ restaurant.city }} <br>
+    <b>price:</b>
+    {% for i in range(restaurant.price) %}
+    €
+    {% endfor %} <br> 
+    <b>category:</b>{{ restaurant.category }}<br>
+    <b>description:</b><br>
+    {{ restaurant.description }}<br>
+</p>
+
+{% if session.username%}
+{% if not admin %}
+<p><a href="/review_restaurant/{{ restaurant.id }}">Add review</a><br></p>
+{% endif %}
+<p><a href="/add_to_list/{{ restaurant.id }}">Add to list</a></p>
+{% endif %}
+
+<p><h3>Reviews</h3></p>
+{% for review in reviews %}
+<b>user:</b> {{ review.username }} <br>
+<b>rating:</b>{{ review.rating }}/5 <br>
+{% if review.comment %}
+<b>comment:</b><br>
+{% endif %}
+{{ review.comment }}
+{% endfor %}
+
+
+<br><a href="/user_page">return</a>
+
+
