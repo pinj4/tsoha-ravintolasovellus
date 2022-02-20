@@ -19,7 +19,7 @@ Sovelluksen ominaisuuksia:
 Nykyisessä versiossa pystyy:
 - kirjautumaan sisään ja luomaan tunnukset käyttäjänä ja ylläpitäjänä
 - näkemään lisätyt ravintolat ja niiden tiedot
-- näkemään ravintoloista lisää tietoa sekä sen arvostelut klikkaamalla ravintolamn nimeä
+- näkemään ravintoloista lisää tietoa sekä sen arvostelut klikkaamalla ravintolan nimeä
 - tekemään arvostelun ravintolalle
 - luomaan omia listoja ja lisätä niihin ravintoloita
 - ylläpitäjä voi listätä ravintolan ja nähdä aikaisemmin lisäämänsä ravintolat
