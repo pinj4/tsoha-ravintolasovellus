@@ -28,10 +28,8 @@ def login():
                 return redirect("/admin_page")
             if user.is_admin == False:
                 return redirect("/user_page")
-            else:
-                return render_template("error.html")
         else:
-            return render_template("error.html")
+            return render_template("error.html", message = "wrong username or password")
 
 @app.route("/user_page", methods = ["GET", "POST"])
 def user_page():
@@ -104,14 +102,15 @@ def review_restaurant(id):
         restaurant_info = restaurant.get_restaurant(id)
 
         reviews.add_review(rating, comment, id)
-        return redirect("/user_page")
+        return redirect("/restaurant_page/" + str(id))
 
 @app.route("/restaurant_page/<int:id>", methods = ["GET"])
 def restaurant_page(id):
     restaurant_info = restaurant.get_restaurant(id)
     reviews_info = reviews.get_reviews(id)
+    avg_rating = reviews.avg_rating(id)
 
-    return render_template("restaurant.html", restaurant = restaurant_info, reviews = reviews_info)
+    return render_template("restaurant.html", restaurant = restaurant_info, reviews = reviews_info, avg_rating = avg_rating)
 
 @app.route("/list_page/<int:id>", methods = ["GET"])
 def list_page(id):
@@ -132,8 +131,11 @@ def add_to_list(id):
         restaurant_id = id
         list_id = request.form["list_id"]
 
-        lists.add_to_list(list_id, restaurant_id)
-        return redirect("/restaurant_page/" + str(id))
+        if lists.check_already_in_lists(list_id, id):
+            lists.add_to_list(list_id, restaurant_id)
+            return redirect("/restaurant_page/" + str(id))
+        else:
+            return render_template("error.html", message = "restaurant is already added to this list")
 
 @app.route("/create_list", methods = ["GET", "POST"])
 def create_list():

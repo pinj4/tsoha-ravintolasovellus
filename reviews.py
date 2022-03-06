@@ -8,9 +8,10 @@ from users import get_user_id
     #return False
 
 def check_comment(comment):
-    if len(comment) >= 1 and len(comment) <= 200:
-        return True
-    return False
+    return len(comment) >= 1 and len(comment) <= 200
+    #if len(comment) >= 1 and len(comment) <= 200:
+        #return True
+    #return False
 
 def add_review(rating, comment, restaurant_id):
     username = session["username"]
@@ -32,10 +33,13 @@ def get_reviews(restaurant_id):
     return result.fetchall()
 
 def avg_rating(restaurant_id):
-    sql = "SELECT rating FROM reviews WHERE restaurant_id = :restaurant_id"
-    result = db.session.execute(sql, {"restaurant_id": restaurant_id}).fetchall()
-    avg = sum(result)/len(result)
-    return avg
+    sql = "SELECT AVG(rating), SUM(rating) FROM reviews WHERE restaurant_id = :restaurant_id"
+    result = db.session.execute(sql, {"restaurant_id": restaurant_id}).fetchone()
+    ratings_sum = result[1]
+    average = result[0]
+    if ratings_sum:
+        return "%.2f" % average
+    else:
+        return "no ratings yet"
 
-
-
+    

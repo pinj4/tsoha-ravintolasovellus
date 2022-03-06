@@ -20,6 +20,17 @@ def get_list_id(name):
     except:
         return False
 
+def check_already_in_lists(list_id, restaurant_id):
+    sql = "SELECT restaurant_id FROM list_content WHERE list_id = :list_id"
+    restaurants = db.session.execute(sql, {"list_id":list_id}).fetchall()
+    restaurant = []
+    for i in restaurants:
+        restaurant.append(i.restaurant_id)
+    if restaurant_id in restaurant:
+        return False
+    return True
+    
+
 def add_to_list(list_id, restaurant_id):
     sql = "INSERT INTO list_content (list_id, restaurant_id) VALUES (:list_id, :restaurant_id)"
     db.session.execute(sql, {"list_id":list_id, "restaurant_id":restaurant_id})
@@ -32,7 +43,7 @@ def get_list_content(list_id):
     for res_id in result:
         restaurant_id = res_id.restaurant_id
         sql = "SELECT id, name FROM restaurants WHERE id = :restaurant_id"
-        res = db.session.execute(sql, {"restaurant_id":restaurant_id})
+        res = db.session.execute(sql, {"restaurant_id":restaurant_id}).fetchone()
         content.append(res)
     return content
 

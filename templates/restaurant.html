@@ -10,6 +10,7 @@
     <b>category:</b>{{ restaurant.category }}<br>
     <b>description:</b><br>
     {{ restaurant.description }}<br>
+    <b> average rating: </b> {{ avg_rating }}
 </p>
 
 {% if session.username%}
@@ -21,13 +22,16 @@
 
 <p><h3>Reviews</h3></p>
 {% for review in reviews %}
+<p>
 <b>user:</b> {{ review.username }} <br>
 <b>rating:</b>{{ review.rating }}/5 <br>
 {% if review.comment %}
 <b>comment:</b><br>
 {% endif %}
 {{ review.comment }}
+</p>
 {% endfor %}
+
 
 
 <br><a href="/user_page">return</a>
