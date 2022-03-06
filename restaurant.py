@@ -30,8 +30,12 @@ def get_restaurant(id):
     return result.fetchone()
 
 def get_restaurant_id(name):
-    sql = "SELECT id, name, city, address, category, price, category, description FROM restaurants WHERE name = :name"
+    sql = "SELECT id, name, city, address, category, price, description FROM restaurants WHERE name = :name"
     result = db.session.execute(sql, {"name":name})
     return result.fetchone()
     
+def delete_restaurant(id):
+    sql = "DELETE FROM restaurants WHERE id = :id"
+    db.session.execute(sql, {"id":id})
+    db.session.commit()
 

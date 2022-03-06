@@ -147,3 +147,9 @@ def create_list():
 
         lists.create_list(name)
         return redirect("/user_page")
+
+@app.route("/delete_restaurant/<int:id>", methods = ["POST"])
+def delete_restaurant(id):
+    if request.method == "POST":
+        restaurant.delete_restaurant(id)
+        return redirect("/admin_page")

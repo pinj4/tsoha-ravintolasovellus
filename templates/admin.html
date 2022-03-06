@@ -25,7 +25,10 @@ You don't have any restaurants yet. <a href="/add_restaurant">Add?</a>
             €
             {% endfor %}
         </td>
-        <td>{{ restaurant.category }}</td></tr>
+        <td>{{ restaurant.category }}</td>
+        <form action="/delete_restaurant/{{ restaurant.id }}" method=POST>
+            <td><input type="submit" value="delete"></td>
+        </form></tr>
     {% endfor %}
 </table>
 {% endif %}

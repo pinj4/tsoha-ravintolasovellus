@@ -9,9 +9,6 @@ from users import get_user_id
 
 def check_comment(comment):
     return len(comment) >= 1 and len(comment) <= 200
-    #if len(comment) >= 1 and len(comment) <= 200:
-        #return True
-    #return False
 
 def add_review(rating, comment, restaurant_id):
     username = session["username"]
