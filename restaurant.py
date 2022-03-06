@@ -35,6 +35,10 @@ def get_restaurant_id(name):
     return result.fetchone()
     
 def delete_restaurant(id):
+    sql = "DELETE FROM reviews WHERE restaurant_id = :id"
+    db.session.execute(sql, {"id":id})
+    db.session.commit()
+    
     sql = "DELETE FROM restaurants WHERE id = :id"
     db.session.execute(sql, {"id":id})
     db.session.commit()

@@ -13,10 +13,8 @@
     <b> average rating: </b> {{ avg_rating }}
 </p>
 
-{% if session.username%}
 {% if not admin %}
 <p><a href="/review_restaurant/{{ restaurant.id }}">Add review</a><br></p>
-{% endif %}
 <p><a href="/add_to_list/{{ restaurant.id }}">Add to list</a></p>
 {% endif %}
 
