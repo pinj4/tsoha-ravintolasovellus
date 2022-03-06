@@ -44,3 +44,10 @@ def is_admin():
 
 def logout():
     del session["username"]
+
+def check_user():
+    try:
+        if session["username"]:
+            return True
+    except:
+        return False
