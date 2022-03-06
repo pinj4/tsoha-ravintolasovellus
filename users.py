@@ -36,8 +36,11 @@ def get_user_id(username):
     return user.id
 
 def is_admin():
-    user = get_user(session["username"])
-    return user.is_admin
+    try:
+        user = get_user(session["username"])
+        return user.is_admin
+    except:
+        return False
 
 def logout():
     del session["username"]

@@ -11,7 +11,8 @@ app.secret_key = getenv("SECRET_KEY")
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    admin = users.is_admin()
+    return render_template("index.html", admin = admin)
 
 @app.route("/login", methods = ["GET", "POST"])
 def login():
