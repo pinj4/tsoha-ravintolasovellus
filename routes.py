@@ -1,4 +1,4 @@
-from flask import render_template, request, session, redirect
+from flask import render_template, request, session, redirect, abort
 from os import getenv
 from app import app
 from db import db
@@ -20,6 +20,9 @@ def login():
         return render_template("index.html")
     
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
+
         username = request.form["username"]
         password = request.form["password"]
 
@@ -32,7 +35,7 @@ def login():
         else:
             return render_template("error.html", message = "wrong username or password")
 
-@app.route("/user_page", methods = ["GET", "POST"])
+@app.route("/user_page", methods = ["GET"])
 def user_page():
     if users.check_user():
         restaurants = restaurant.get_all_restaurants()
@@ -42,7 +45,7 @@ def user_page():
         return render_template("error.html", message= "you are not signed in")
     
 
-@app.route("/admin_page", methods =["GET", "POST"])
+@app.route("/admin_page", methods =["GET"])
 def admin_page():
     if users.check_user():
         restaurants = restaurant.get_restaurants_by_admin()
@@ -58,7 +61,10 @@ def add_restaurant():
             return render_template("add_restaurant.html")
         else:
             return render_template("error.html", message= "you are not signed in")
+    
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         if users.check_user():
             name = request.form.get("name")
             city = request.form.get("city")
@@ -84,6 +90,8 @@ def signup_user():
         return render_template("signup_user.html")
 
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         username = request.form["username"]
         password = request.form["password"]
 
@@ -97,6 +105,8 @@ def signup_admin():
         return render_template("signup_admin.html")
     
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         username = request.form["username"]
         password = request.form["password"]
 
@@ -113,6 +123,9 @@ def review_restaurant(id):
             return render_template("error.html", message= "you are not signed in")
     
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
+
         if users.check_user():
             rating = request.form["rating"]
             comment = request.form["comment"]
@@ -150,6 +163,8 @@ def list_page(id):
             return render_template("error.html", message= "you are not signed in")
     
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         if users.check_user():
             restaurant_id = request.form["restaurant_id"]
             lists.delete_restaurant_from_lists(restaurant_id, id)
@@ -170,6 +185,9 @@ def add_to_list(id):
 
     
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
+
         if users.check_user():
             restaurant_id = id
             list_id = request.form["list_id"]
@@ -192,6 +210,9 @@ def create_list():
             return render_template("error.html", message= "you are not signed in")
     
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
+
         if users.check_user():
             name = request.form["name"]
 
@@ -204,6 +225,8 @@ def create_list():
 @app.route("/delete_restaurant/<int:id>", methods = ["POST"])
 def delete_restaurant(id):
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         if users.check_user():
             restaurant.delete_restaurant(id)
             return redirect("/admin_page")
@@ -212,6 +235,8 @@ def delete_restaurant(id):
 @app.route("/delete_review/<int:id>", methods = ["POST"])
 def delete_review(id):
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         if users.check_user():
             restaurant_id = reviews.delete_review(id)
             return redirect("/restaurant_page/"+ str(restaurant_id))

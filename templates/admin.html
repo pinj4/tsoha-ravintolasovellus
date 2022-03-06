@@ -28,6 +28,7 @@ You don't have any restaurants yet. <a href="/add_restaurant">Add?</a>
         <td>{{ restaurant.category }}</td>
         <form action="/delete_restaurant/{{ restaurant.id }}" method=POST>
             <td><input type="submit" value="delete"></td>
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         </form></tr>
     {% endfor %}
 </table>

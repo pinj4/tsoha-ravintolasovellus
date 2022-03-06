@@ -31,6 +31,7 @@
     {% if admin %}
     <form action="/delete_review/{{ review.id }}" method=POST>
         <input type="submit" value="delete">
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
     {% endif %}
 </b>

@@ -33,6 +33,7 @@
     Description: <br>
     <textarea name="desc" rows="7" cols="40"></textarea><br>
     <input type="submit" value="create">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </p>
 </form>
 <br>

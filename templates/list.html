@@ -6,6 +6,7 @@
 <form action="/list_page/{{ list_id }}" method=POST>
     <input type="submit" value="delete">
     <input type="hidden" name = "restaurant_id" value="{{ restaurant.id }}">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form><br>
 {% endfor %}
 
