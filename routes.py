@@ -109,8 +109,10 @@ def restaurant_page(id):
     restaurant_info = restaurant.get_restaurant(id)
     reviews_info = reviews.get_reviews(id)
     avg_rating = reviews.avg_rating(id)
+    admin = users.is_admin()
 
-    return render_template("restaurant.html", restaurant = restaurant_info, reviews = reviews_info, avg_rating = avg_rating)
+    return render_template("restaurant.html", restaurant = restaurant_info, reviews = reviews_info, 
+    avg_rating = avg_rating, admin = admin)
 
 @app.route("/list_page/<int:id>", methods = ["GET"])
 def list_page(id):
@@ -153,3 +155,9 @@ def delete_restaurant(id):
     if request.method == "POST":
         restaurant.delete_restaurant(id)
         return redirect("/admin_page")
+
+@app.route("/delete_review/<int:id>", methods = ["POST"])
+def delete_review(id):
+    if request.method == "POST":
+        restaurant_id = reviews.delete_review(id)
+        return redirect("/restaurant_page/"+ str(restaurant_id))

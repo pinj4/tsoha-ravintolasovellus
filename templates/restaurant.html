@@ -29,11 +29,20 @@
 <b>comment:</b><br>
 {% endif %}
 {{ review.comment }}
+<b>
+    {% if admin %}
+    <form action="/delete_review/{{ review.id }}" method=POST>
+        <input type="submit" value="delete">
+    </form>
+    {% endif %}
+</b>
 </p>
 {% endfor %}
 
 
-
+{% if admin %}
+<br><a href="/admin_page">return</a>
+{% else %}
 <br><a href="/user_page">return</a>
-
+{% endif %}
 

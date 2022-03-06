@@ -35,5 +35,9 @@ def get_user_id(username):
     user = get_user(username)
     return user.id
 
+def is_admin():
+    user = get_user(session["username"])
+    return user.is_admin
+
 def logout():
     del session["username"]

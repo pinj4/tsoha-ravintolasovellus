@@ -25,7 +25,7 @@ def add_review(rating, comment, restaurant_id):
         db.session.commit()
 
 def get_reviews(restaurant_id):
-    sql = "SELECT username, rating, comment FROM reviews WHERE restaurant_id = :restaurant_id"
+    sql = "SELECT id, username, rating, comment FROM reviews WHERE restaurant_id = :restaurant_id"
     result = db.session.execute(sql, {"restaurant_id":restaurant_id})
     return result.fetchall()
 
@@ -39,4 +39,12 @@ def avg_rating(restaurant_id):
     else:
         return "no ratings yet"
 
+def delete_review(id):
+    sql = "SELECT restaurant_id FROM reviews WHERE id = :id"
+    restaurant_id = db.session.execute(sql, {"id":id}).fetchone().restaurant_id
+    
+    sql = "DELETE FROM reviews WHERE id = :id"
+    db.session.execute(sql, {"id":id})
+    db.session.commit()
+    return restaurant_id
     
