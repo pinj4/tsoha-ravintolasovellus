@@ -63,6 +63,11 @@ def get_users_lists():
         return result
     except:
         return False
+    
+def delete_restaurant_from_lists(restaurant_id, list_id):
+    sql = "DELETE FROM list_content WHERE restaurant_id = :restaurant_id and list_id = :list_id"
+    db.session.execute(sql, {"restaurant_id":restaurant_id, "list_id":list_id})
+    db.session.commit()
 
 
 

@@ -2,7 +2,11 @@
 <h2>{{ name }}</h2>
 
 {% for restaurant in content %}
-<a href="/restaurant_page/{{ restaurant.id }}">{{ restaurant.name }}</a><br>
+<a href="/restaurant_page/{{ restaurant.id }}">{{ restaurant.name }}</a>
+<form action="/list_page/{{ list_id }}" method=POST>
+    <input type="submit" value="delete">
+    <input type="hidden" name = "restaurant_id" value="{{ restaurant.id }}">
+</form><br>
 {% endfor %}
 
 <a href="/user_page">return</a>

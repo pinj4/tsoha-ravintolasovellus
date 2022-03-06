@@ -115,12 +115,18 @@ def restaurant_page(id):
     return render_template("restaurant.html", restaurant = restaurant_info, reviews = reviews_info, 
     avg_rating = avg_rating, admin = admin)
 
-@app.route("/list_page/<int:id>", methods = ["GET"])
+@app.route("/list_page/<int:id>", methods = ["GET", "POST"])
 def list_page(id):
-    content = lists.get_list_content(id)
-    name = lists.get_list_name(id)
+    if request.method == "GET":
+        content = lists.get_list_content(id)
+        name = lists.get_list_name(id)
 
-    return render_template("list.html", name = name, content = content)
+        return render_template("list.html", name = name, content = content, list_id = id)
+    
+    if request.method == "POST":
+        restaurant_id = request.form["restaurant_id"]
+        lists.delete_restaurant_from_lists(restaurant_id, id)
+        return redirect("/list_page/" + str(id))
 
 @app.route("/add_to_list/<int:id>", methods = ["GET", "POST"])
 def add_to_list(id):
